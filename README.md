@@ -50,7 +50,7 @@ add some tailwind decorator on styles/global.css
     @tailwind utilities;
 ```
 
-#### Prisma Config
+### Prisma Config
 
 > npm i ts-node --save-dev <br/>
 
