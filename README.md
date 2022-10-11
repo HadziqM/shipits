@@ -8,7 +8,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 > mkdir component </br>
 > mkdir lib </br>
 > mkdir test </br> </br>
-> add path to tsconfig.json CompilerOptions</br>
+
+add path to tsconfig.json CompilerOptions</br>
 
 ```
     "baseUrl": ".",
