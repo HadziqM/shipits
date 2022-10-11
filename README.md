@@ -9,9 +9,12 @@ mkdir component </br>
 mkdir lib </br>
 mkdir test </br> </br>
 add path to tsconfig.json </br>
-"paths": {
-"@/components/_": ["components/_"],
-"@/lib/_": ["lib/_"],
-"@/pages/_": ["pages/_"],
-"@/public/_": ["public/_"]
-}
+
+```
+    "paths": {
+        "@/components/_": ["components/_"],
+        "@/lib/_": ["lib/_"],
+        "@/pages/_": ["pages/_"],
+        "@/public/_": ["public/_"]
+    }
+```
