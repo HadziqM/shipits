@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+}
+
+model ships {
+  id       Int    @id @default(autoincrement())
+  ship     kapals @relation(fields: [brand], references: [brand])
+  brand    String
+  username String
+}
+
+model kapals {
+  id      Int      @id @default(autoincrement())
+  brand   String   @unique
+  maxfuel Int      @default(3500)
+  maxstg  Int      @default(2000)
+  maxstt  Int      @default(1000)
+  maxsrv  Int      @default(500)
+  maxrpm  Int      @default(5000)
+  maxoil  Int      @default(400)
+  maxtemp Int      @default(1000)
+  maxvib  Int      @default(1000)
+  sensor  senses[]
+  ship    ships[]
+}
+
+model senses {
+  id         Int      @id @default(autoincrement())
+  ship       kapals   @relation(fields: [shipname], references: [brand])
+  shipname   String
+  gps_n      Float
+  gps_w      Float
+  distance   BigInt
+  fuel       Int
+  stg        Int
+  stt        Int
+  srv        Int
+  oil        Int
+  temp       Int
+  rpm        Int
+  vib        Int
+  slantx     Int
+  slanty     Int
+  speed      Int
+  gsm        Boolean  @default(false)
+  internet   Boolean  @default(true)
+  satelit    Boolean  @default(false)
+  flow       Boolean  @default(true)
+  level      Boolean  @default(true)
+  rpmsense   Boolean  @default(true)
+  vibsense   Boolean  @default(true)
+  oilsense   Boolean  @default(true)
+  tempsense  Boolean  @default(true)
+  slantsense Boolean  @default(true)
+  gps        Boolean  @default(true)
+  camera     Boolean  @default(true)
+  updated    DateTime @default(now())
+}
