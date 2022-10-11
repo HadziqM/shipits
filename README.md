@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### Typescrypt Config
 
 > npx create-next-app@latest --ts </br>
-> mkdir component </br>
+> mkdir components </br>
 > mkdir lib </br>
 > mkdir test </br>
 
@@ -42,6 +42,14 @@ setting up tailwind.config.json <br/>
     };
 ```
 
+add some tailwind decorator on styles/global.css
+
+```
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+```
+
 #### Prisma Config
 
 > npm i ts-node --save-dev <br/>
@@ -61,13 +69,17 @@ edit schema.prisma <br/><br/>
 
 > npx prisma migrate dev --name init <br/>
 
-### Developer Mode
+### Google Charts
 
-#### Prisma Playground
+> npm install --save react-google-charts
+
+## Developer Mode
+
+### Prisma Playground
 
 > npx prisma studio <br/>
 
-#### Next Playground
+### Next Playground
 
 add some script on package.json to make next run on specific ip and port<br/>
 
