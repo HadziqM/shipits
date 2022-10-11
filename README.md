@@ -7,7 +7,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 > npx create-next-app@latest --ts </br>
 > mkdir component </br>
 > mkdir lib </br>
-> mkdir test </br> </br>
+> mkdir test </br>
 
 add path to tsconfig.json CompilerOptions</br>
 
@@ -23,9 +23,10 @@ add path to tsconfig.json CompilerOptions</br>
 
 ### Tailwind Config
 
-npm install -D tailwindcss postcss autoprefixer </br>
-npx tailwindcss init -p </br>
-npm i daisyui </br></br>
+> npm install -D tailwindcss postcss autoprefixer </br>
+> npx tailwindcss init -p </br>
+> npm i daisyui </br>
+
 setting up tailwind.config.json <br/>
 
 ```
@@ -43,7 +44,8 @@ setting up tailwind.config.json <br/>
 
 #### Prisma Config
 
-npm i ts-node --save-dev <br/>
+> npm i ts-node --save-dev <br/>
+
 add output dir to tsconfig.json CompilerOptions<br/>
 
 ```
@@ -51,17 +53,19 @@ add output dir to tsconfig.json CompilerOptions<br/>
     "outDir": "dist"
 ```
 
-npm install prisma --save-dev <br/>
-npx prisma init --datasource-provider postgresql <br/><br/>
+> npm install prisma --save-dev <br/>
+> npx prisma init --datasource-provider postgresql <br/>
+
 edit .env for psql database url<br/>
 edit schema.prisma <br/><br/>
-npx prisma migrate dev --name init <br/>
+
+> npx prisma migrate dev --name init <br/>
 
 ### Developer Mode
 
 #### Prisma Playground
 
-npx prisma studio <br/>
+> npx prisma studio <br/>
 
 #### Next Playground
 
@@ -76,4 +80,4 @@ add some script on package.json to make next run on specific ip and port<br/>
     },
 ```
 
-npm run dev
+> npm run dev
