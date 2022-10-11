@@ -4,11 +4,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Typescrypt Config
 
-npx create-next-app@latest --ts </br>
-mkdir component </br>
-mkdir lib </br>
-mkdir test </br> </br>
-add path to tsconfig.json CompilerOptions</br>
+> npx create-next-app@latest --ts </br>
+> mkdir component </br>
+> mkdir lib </br>
+> mkdir test </br> </br>
+> add path to tsconfig.json CompilerOptions</br>
 
 ```
     "baseUrl": ".",
