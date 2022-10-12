@@ -40,8 +40,8 @@ model kapals {
 
 model senses {
   id         Int      @id @default(autoincrement())
-  ship       kapals   @relation(fields: [shipname], references: [brand])
-  shipname   String
+  ship       kapals   @relation(fields: [shipid], references: [id])
+  shipid     Int
   gps_n      Float
   gps_w      Float
   distance   BigInt
