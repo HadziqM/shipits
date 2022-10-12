@@ -6,7 +6,7 @@ export default function Dash() {
   return (
     <>
       <HeaderIts></HeaderIts>
-      <div className="flex flex-col items-center mt-2 mb-10">
+      <div className="flex flex-col items-center mt-2 mb-20">
         <ShipMount></ShipMount>
       </div>
       <FooterIts></FooterIts>
