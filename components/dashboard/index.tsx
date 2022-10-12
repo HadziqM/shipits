@@ -8,11 +8,13 @@ import { useState, useEffect } from "react";
 export default function Dash() {
   const [history, setHistory] = useState(false);
   const [shipdown, setShipdown] = useState([]);
+  const [somedata, setSomedata] = useState({} as any);
+  const [maxvalue, setMaxvalue] = useState({} as any);
   const user = "hertz";
-  let select = (e: any) => {
-    console.log(e);
+  let select = (e: string) => {
+    setMaxvalue(somedata[e]);
   };
-  let hist = (data: any) => {
+  let hist = (data: object) => {
     setHistory(true);
     console.log(data);
   };
@@ -22,7 +24,11 @@ export default function Dash() {
   useEffect(() => {
     let shit = async () => {
       const data = await (await fetch(`/api/${user}`)).json();
-      setShipdown(data.name.map((e: any) => e.brand));
+      setShipdown(data.name.map((e: any) => [e.brand, e.id]));
+      let rv: any = {};
+      for (let i = 0; i < data.name.length; ++i)
+        rv[data.name[i].id] = data.name[i];
+      setSomedata(rv);
     };
     shit();
   }, []);
@@ -36,7 +42,7 @@ export default function Dash() {
           get={hist}
           now={() => setHistory(false)}
         />
-        <ShipMount history={history} />
+        <ShipMount history={history} maxvalue={maxvalue} />
       </div>
       <FooterIts></FooterIts>
     </>

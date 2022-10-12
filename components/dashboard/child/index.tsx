@@ -33,12 +33,38 @@ export default function ShipMount(props: any) {
   ];
   return (
     <div className="w-4/5 grid grid-rows-6 grid-flow-col gap-1">
-      <Fuel />
-      <FuelSc />
-      <Radial id="rpm" name="Rpm" symbol="0" maxradial="100" radial="50" />
-      <Radial id="temp" name="Temp" symbol="C" maxradial="100" radial="20" />
-      <Radial id="oil" name="Oil" symbol="L" />
-      <Radial id="vib" name="Vib" symbol="Khz" />
+      <Fuel maxfuel={props.maxvalue.maxfuel} />
+      <FuelSc
+        maxstg={props.maxvalue.maxstg}
+        maxstt={props.maxvalue.maxstt}
+        maxsrv={props.maxvalue.maxsrv}
+      />
+      <Radial
+        id="rpm"
+        name="Rpm"
+        symbol="0"
+        maxradial={props.maxvalue.maxrpm}
+        radial="50"
+      />
+      <Radial
+        id="temp"
+        name="Temp"
+        symbol="C"
+        maxradial={props.maxvalue.maxtemp}
+        radial="20"
+      />
+      <Radial
+        id="oil"
+        name="Oil"
+        symbol="L"
+        maxradial={props.maxvalue.maxoil}
+      />
+      <Radial
+        id="vib"
+        name="Vib"
+        symbol="Khz"
+        maxradial={props.maxvalue.maxvib}
+      />
       <FuelGraph history={true} historyData={data2} />
       <NormGraph
         id="rpmg"

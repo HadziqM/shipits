@@ -10,7 +10,7 @@ export default function ShipDrop(props: any) {
             Select Your Ship to Monitor
           </option>
           {props.drop.map((e: any) => (
-            <option value={e}>{e}</option>
+            <option value={e[1]}>{e[0]}</option>
           ))}
         </select>
       </div>
