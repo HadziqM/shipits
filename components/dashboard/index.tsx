@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 
 export default function Dash() {
   const [history, setHistory] = useState(false);
+  const user = "hertz";
   let select = (e: any) => {
     console.log(e);
   };
@@ -17,6 +18,14 @@ export default function Dash() {
   useEffect(() => {
     console.log(history);
   }, [history]);
+  useEffect(() => {
+    let shit = async () => {
+      const res = await fetch(`/api/${user}`);
+      const data = await res.json();
+      console.log(data);
+    };
+    shit();
+  }, []);
   return (
     <>
       <HeaderIts></HeaderIts>
