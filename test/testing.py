@@ -59,9 +59,9 @@ class getwtf:
         self.slanty = rand_cmp(self.slanty, 5)
         self.speed = rand_cmp(self.speed, 1)
         self.distance = rand_asc(self.distance, 1)
-        row = ["shipname", "gps_n", "gps_w", "fuel", "stg", "stt", "srv", "oil",
+        row = ["shipid", "gps_n", "gps_w", "fuel", "stg", "stt", "srv", "oil",
                "rpm", "vib", "temp", "slantx", "slanty", "speed", "distance"]
-        val = ["KM Jawa", self.gps_n, self.gps_w, self.fuel, self.stg, self.stt, self.srv, self.oil,
+        val = [1, self.gps_n, self.gps_w, self.fuel, self.stg, self.stt, self.srv, self.oil,
                self.rpm, self.vib, self.temp, self.slantx, self.slanty, self.speed, self.distance]
         await basicpg().new_row("senses", row, val)
 

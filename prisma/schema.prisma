@@ -44,7 +44,7 @@ model senses {
   shipid     Int
   gps_n      Float
   gps_w      Float
-  distance   BigInt
+  distance   Int
   fuel       Int
   stg        Int
   stt        Int

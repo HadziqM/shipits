@@ -12,6 +12,6 @@ type Data = {
 export default async function handler(req: NextApiRequest,
     res: NextApiResponse<Data>) {
     const { uid } = req.query
-    const ships: any = await prisma.senses.findFirst({where:{shipid:Number(`${uid}`)}})
+    const ships: any = await prisma.senses.findMany({where:{shipid:Number(`${uid}`)}})
     res.status(200).json({ name: Number(`${uid}`),ship:ships  })
   }
