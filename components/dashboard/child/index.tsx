@@ -3,6 +3,12 @@ import FuelSc from "./fuelsc";
 import Radial from "./radial";
 import FuelGraph from "./fuelgraph";
 import NormGraph from "./normgraph";
+import Compas from "./compas";
+import Distance from "./distance";
+import Gps from "./gps";
+import Gyro from "./gyro";
+import Notif from "./notif";
+import Status from "./status";
 export default function ShipMount() {
   const data = [
     ["Seconds", "RPM"],
@@ -61,6 +67,12 @@ export default function ShipMount() {
         history={true}
         historyData={data}
       />
+      <Compas />
+      <Gyro />
+      <Gps />
+      <Distance />
+      <Notif />
+      <Status />
     </div>
   );
 }

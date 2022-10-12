@@ -51,7 +51,7 @@ export default function FuelGraph(props: any) {
   };
 
   return (
-    <div className="text-white flex w-s9 h-full justify-center items-center bg-gray-800 flex-col pt-4 row-span-2 col-span-4">
+    <div className="text-white flex w-res2 h-res2 justify-center items-center bg-gray-800 flex-col pt-4 row-span-2 col-span-4">
       <h2>Frame Rate</h2>
       <Chart
         chartType="AreaChart"

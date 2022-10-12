@@ -26,6 +26,10 @@ a {
   box-sizing: border-box;
 }
 
+.status p {
+  font-size: 0.75rem;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
