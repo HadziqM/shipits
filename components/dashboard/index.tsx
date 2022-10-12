@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 
 export default function Dash() {
   const [history, setHistory] = useState(false);
+  const [shipdown, setShipdown] = useState([]);
   const user = "hertz";
   let select = (e: any) => {
     console.log(e);
@@ -20,9 +21,8 @@ export default function Dash() {
   }, [history]);
   useEffect(() => {
     let shit = async () => {
-      const res = await fetch(`/api/${user}`);
-      const data = await res.json();
-      console.log(data);
+      const data = await (await fetch(`/api/${user}`)).json();
+      setShipdown(data.name.map((e: any) => e.brand));
     };
     shit();
   }, []);
@@ -30,7 +30,7 @@ export default function Dash() {
     <>
       <HeaderIts></HeaderIts>
       <div className="flex flex-col items-center mt-2 mb-20">
-        <ShipDrop drop={["KM Jawa", "KM Madura"]} select={select} />
+        <ShipDrop drop={shipdown} select={select} />
         <HistControl
           drop={[1, 2, 3]}
           get={hist}
