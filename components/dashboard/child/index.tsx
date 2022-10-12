@@ -9,7 +9,8 @@ import Gps from "./gps";
 import Gyro from "./gyro";
 import Notif from "./notif";
 import Status from "./status";
-export default function ShipMount() {
+export default function ShipMount(props: any) {
+  let hist = props.history;
   const data = [
     ["Seconds", "RPM"],
     ["0", 50],
