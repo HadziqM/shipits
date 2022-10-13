@@ -22,6 +22,11 @@ export default function FuelGraph(props: any) {
     test.pop();
     setData(test);
   }, [props.data1]);
+
+  const [histdata, setHistdata] = useState(dummy2 as any);
+  useEffect(() => {
+    setHistdata([...props.histdata]);
+  }, [props.history]);
   // const [truth, setTruth] = useState(props.history);
   // const [history, setHistory] = useState(props.historyData);
   // useEffect(() => {
@@ -53,17 +58,20 @@ export default function FuelGraph(props: any) {
   //   updated.length >= 10 && updated.pop();
   //   setData(updated);
   // };
-  const anjir = {
-    title: "Fuel",
-    legend: { textStyle: { color: "#fff" } },
-    titleTextStyle: { color: "#fff" },
-    vAxis: { minValue: 0, textStyle: { color: "#fff" } },
-    hAxis: {
-      textStyle: { color: "#fff" },
-    },
-    chartArea: { width: "75%", height: "70%" },
-    backgroundColor: "rgb(31,41,55)",
-    colors: ["#aaf", "0aa", "a0a", "aa0"],
+  let anjir = () => {
+    return {
+      title: "Fuel",
+      legend: { textStyle: { color: "#fff" } },
+      titleTextStyle: { color: "#fff" },
+      vAxis: { minValue: 0, textStyle: { color: "#fff" } },
+      hAxis: {
+        textStyle: { color: "#fff" },
+      },
+      chartArea: { width: "75%", height: "70%" },
+      backgroundColor:
+        props.history === false ? "rgb(31,41,55)" : "rgb(55,55,55)",
+      colors: ["#aaf", "0aa", "a0a", "aa0"],
+    };
   };
 
   return (
@@ -73,8 +81,12 @@ export default function FuelGraph(props: any) {
         chartType="AreaChart"
         width="100%"
         height="100%"
-        data={[...dummy, ...data]}
-        options={anjir}
+        data={
+          props.history === false
+            ? [...dummy, ...data]
+            : [...dummy, ...histdata]
+        }
+        options={anjir()}
       />
     </div>
   );

@@ -49,6 +49,26 @@ export default function ShipMount(props: any) {
       data,
     ];
   };
+  let fueldata = () => {
+    let data = props.histdata.map((e: any) => [
+      `${new Date(e.updated * 1000).getHours()}:${new Date(
+        e.updated * 1000
+      ).getMinutes()}`,
+      e.fuel,
+      e.stg,
+      e.stt,
+      e.srv,
+    ]);
+    return data;
+  };
+  let radialdata = (name: string) => {
+    return props.histdata.map((e: any) => [
+      `${new Date(e.updated * 1000).getHours()}:${new Date(
+        e.updated * 1000
+      ).getMinutes()}`,
+      e[name],
+    ]);
+  };
   return (
     <div className="w-4/5 grid grid-rows-6 grid-flow-col gap-1">
       <Fuel maxfuel={props.maxvalue.maxfuel} fuel={props.value.fuel} />
@@ -90,7 +110,7 @@ export default function ShipMount(props: any) {
       />
       <FuelGraph
         history={props.history}
-        historyData={data2}
+        histdata={fueldata()}
         data1={fuelres()}
       />
       <NormGraph
@@ -98,7 +118,7 @@ export default function ShipMount(props: any) {
         name="Rpm"
         color="#fff"
         history={props.history}
-        historyData={data}
+        histdata={radialdata("rpm")}
         data={responses(props.value.rpm)}
       />
       <NormGraph
@@ -106,7 +126,7 @@ export default function ShipMount(props: any) {
         name="Temp"
         color="#f0f"
         history={props.history}
-        historyData={data}
+        histdata={radialdata("temp")}
         data={responses(props.value.temp)}
       />
       <NormGraph
@@ -114,7 +134,7 @@ export default function ShipMount(props: any) {
         name="Oil"
         color="#ff0"
         history={props.history}
-        historyData={data}
+        histdata={radialdata("oil")}
         data={responses(props.value.oil)}
       />
       <NormGraph
@@ -122,7 +142,7 @@ export default function ShipMount(props: any) {
         name="Vib"
         color="#00f"
         history={props.history}
-        historyData={data}
+        histdata={radialdata("vib")}
         data={responses(props.value.vib)}
       />
       <Compas degree={props.value.compas} speed={props.value.speed} />

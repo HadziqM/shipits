@@ -12,5 +12,6 @@ export default async function handler(req: NextApiRequest,
     res: NextApiResponse<Data>) {
     const { uid } = req.query
     const ships: any = await prisma.senses.findFirst({where:{shipid:Number(`${uid}`)},orderBy:{id:"desc"}})
+    await prisma.$disconnect()
     res.status(200).json({ ship:ships  })
   }

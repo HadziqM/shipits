@@ -35,26 +35,28 @@ export default function Dash() {
     slantsense: false,
     gps: false,
     camera: false,
-    updated: 1665645840,
+    updated: 0,
   };
-  const [history, setHistory] = useState(true);
+  const [history, setHistory] = useState(false);
   const [shipdown, setShipdown] = useState([]);
   const [somedata, setSomedata] = useState({} as any);
   const [maxvalue, setMaxvalue] = useState({} as any);
   const [value, setValue] = useState(dummy as any);
   const [selected, setSelected] = useState(1);
+  const [histdata, setHistdata] = useState([dummy] as any);
   const user = "hertz";
   let select = (e: string) => {
     setMaxvalue(somedata[e]);
     setSelected(Number(e));
   };
-  let hist = (data: object) => {
-    setHistory(true);
-    console.log(data);
+  let hist = async (data: any) => {
+    let list = await (await fetch(`/api/all/${selected}`)).json();
+    let res = list.ship
+      .filter((v: any) => v.updated > data.get)
+      .filter((v: any) => v.updated < data.till);
+    setHistdata(res);
+    res.length !== 0 ? setHistory(true) : window.alert("No data at that time");
   };
-  useEffect(() => {
-    console.log(history);
-  }, [history]);
   useEffect(() => {
     let shit = async () => {
       const data = await (await fetch(`/api/${user}`)).json();
@@ -63,12 +65,12 @@ export default function Dash() {
       for (let i = 0; i < data.name.length; ++i)
         rv[data.name[i].id] = data.name[i];
       setSomedata(rv);
+      setMaxvalue(rv[1]);
     };
     shit();
   }, []);
   useEffect(() => {
     let hmmm = setInterval(async () => {
-      console.log(selected);
       const data = await (await fetch(`/api/ship/${selected}`)).json();
       data.ship == null ? setValue(dummy) : setValue(data.ship);
     }, 1500);
@@ -82,12 +84,16 @@ export default function Dash() {
       <div className="flex flex-col items-center mt-2 mb-20">
         <ShipDrop drop={shipdown} select={select} />
         <HistControl
-          drop={[1, 2, 3]}
           get={hist}
           now={() => setHistory(false)}
           time={value.updated}
         />
-        <ShipMount history={history} maxvalue={maxvalue} value={value} />
+        <ShipMount
+          history={history}
+          maxvalue={maxvalue}
+          value={value}
+          histdata={histdata}
+        />
       </div>
       <FooterIts></FooterIts>
     </>

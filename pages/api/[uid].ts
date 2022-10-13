@@ -23,5 +23,6 @@ export default async function handler(req: NextApiRequest,
         }
       })
     ))
+    await prisma.$disconnect()
     res.status(200).json({ name: spec })
   }

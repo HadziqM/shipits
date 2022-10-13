@@ -23,6 +23,12 @@ export default function NormGraph(props: any) {
     test.pop();
     setData(test);
   }, [props.data]);
+
+  const [histdata, setHistdata] = useState(dummy2 as any);
+  useEffect(() => {
+    setHistdata([...props.histdata]);
+  }, [props.history]);
+
   // let idkits = () => {
   //   let test = [props.data, ...data];
   //   test.pop();
@@ -66,16 +72,19 @@ export default function NormGraph(props: any) {
   //   updated.length >= 10 && updated.pop();
   //   setData(updated);
   // };
-  const anjir = {
-    title: props.name,
-    titleTextStyle: { color: "#fff" },
-    vAxis: { minValue: 0, textStyle: { color: "#fff" } },
-    hAxis: {
-      textStyle: { color: "#fff" },
-    },
-    chartArea: { width: "80%", height: "70%" },
-    backgroundColor: "rgb(31,41,55)",
-    colors: [props.color],
+  let anjir = () => {
+    return {
+      title: props.name,
+      titleTextStyle: { color: "#fff" },
+      vAxis: { minValue: 0, textStyle: { color: "#fff" } },
+      hAxis: {
+        textStyle: { color: "#fff" },
+      },
+      chartArea: { width: "80%", height: "70%" },
+      backgroundColor:
+        props.history === false ? "rgb(31,41,55)" : "rgb(55,55,55)",
+      colors: [props.color],
+    };
   };
 
   return (
@@ -85,8 +94,12 @@ export default function NormGraph(props: any) {
         chartType="AreaChart"
         width="100%"
         height="100%"
-        data={[...dummy, ...data]}
-        options={anjir}
+        data={
+          props.history === false
+            ? [...dummy, ...data]
+            : [...dummy, ...histdata]
+        }
+        options={anjir()}
       />
     </div>
   );
