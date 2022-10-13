@@ -9,7 +9,6 @@ import Gps from "./gps";
 import Gyro from "./gyro";
 import Notif from "./notif";
 import Status from "./status";
-import { useState } from "react";
 export default function ShipMount(props: any) {
   const data = [
     ["Seconds", "RPM"],
@@ -31,14 +30,24 @@ export default function ShipMount(props: any) {
     ["50", 90, 34, 21, 31],
     ["60", 30, 12, 34, 32],
   ];
-  const [rpm, setRpm] = useState(["0", 0]);
-  const [temp, setTemp] = useState(["0", 0]);
-  const [oil, setOil] = useState(["0", 0]);
-  const [vib, setVib] = useState(["0", 0]);
-  const [fuel, setFuel] = useState(["0", 0, 0, 0, 0]);
-
-  let rpmsense = () => {
-    return "adios";
+  let fuelres = () => {
+    return [
+      `${new Date(props.value.updated * 1000).getHours()}:${new Date(
+        props.value.updated * 1000
+      ).getMinutes()}`,
+      props.value.fuel,
+      props.value.stg,
+      props.value.stt,
+      props.value.srv,
+    ];
+  };
+  let responses = (data: any) => {
+    return [
+      `${new Date(props.value.updated * 1000).getHours()}:${new Date(
+        props.value.updated * 1000
+      ).getMinutes()}`,
+      data,
+    ];
   };
   return (
     <div className="w-4/5 grid grid-rows-6 grid-flow-col gap-1">
@@ -77,15 +86,20 @@ export default function ShipMount(props: any) {
         name="Vib"
         symbol="Khz"
         maxradial={props.maxvalue.maxvib}
-        radial={props.value.vib}
+        radial={props.value.vib / 1000}
       />
-      <FuelGraph history={props.history} historyData={data2} />
+      <FuelGraph
+        history={props.history}
+        historyData={data2}
+        data1={fuelres()}
+      />
       <NormGraph
         id="rpmg"
         name="Rpm"
         color="#fff"
         history={props.history}
         historyData={data}
+        data={responses(props.value.rpm)}
       />
       <NormGraph
         id="tempg"
@@ -93,6 +107,7 @@ export default function ShipMount(props: any) {
         color="#f0f"
         history={props.history}
         historyData={data}
+        data={responses(props.value.temp)}
       />
       <NormGraph
         id="oilg"
@@ -100,6 +115,7 @@ export default function ShipMount(props: any) {
         color="#ff0"
         history={props.history}
         historyData={data}
+        data={responses(props.value.oil)}
       />
       <NormGraph
         id="vibg"
@@ -107,8 +123,9 @@ export default function ShipMount(props: any) {
         color="#00f"
         history={props.history}
         historyData={data}
+        data={responses(props.value.vib)}
       />
-      <Compas degree={props.value.compas} />
+      <Compas degree={props.value.compas} speed={props.value.speed} />
       <Gyro slantX={props.value.slantx} slantY={props.value.slanty} />
       <Gps gpsn={props.value.gps_n} gpsw={props.value.gps_w} />
       <Distance distance={props.value.distance} />

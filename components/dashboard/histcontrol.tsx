@@ -36,6 +36,9 @@ export default function HistControl(props: any) {
         <button className="btn btn-primary btn-xs" onClick={() => send()}>
           Search
         </button>
+        <p className="flex text-xs mr-4">
+          Last Updated: {String(new Date(props.time * 1000))}
+        </p>
         <button
           className="btn btn-secondary btn-xs ml-auto"
           onClick={() => props.now()}

@@ -37,12 +37,13 @@ class getwtf:
         self.srv = 500
         self.oil = 200
         self.temp = 70
-        self.rpm = 200
+        self.rpm = 400
         self.vib = 2000
         self.slantx = 10
         self.slanty = -10
         self.speed = 3
         self.distance = 4
+        self.compas = -10
 
     async def one_row(self):
         self.gps_n = rand_float(self.gps_n)
@@ -51,18 +52,19 @@ class getwtf:
         self.stg = rand_desc(self.stg, 10)
         self.stt = rand_desc(self.stt, 10)
         self.srv = rand_desc(self.srv, 10)
-        self.oil = rand_cmp(self.oil, 5)
-        self.temp = rand_cmp(self.temp, 1)
-        self.rpm = rand_cmp(self.rpm, 10)
+        self.oil = rand_cmp(self.oil, 50)
+        self.temp = rand_cmp(self.temp, 5)
+        self.rpm = rand_cmp(self.rpm, 80)
         self.vib = rand_cmp(self.vib, 100)
-        self.slantx = rand_cmp(self.slantx, 5)
-        self.slanty = rand_cmp(self.slanty, 5)
+        self.slantx = rand_cmp(self.slantx, 8)
+        self.slanty = rand_cmp(self.slanty, 8)
         self.speed = rand_cmp(self.speed, 1)
         self.distance = rand_asc(self.distance, 1)
+        self.compas = rand_cmp(self.compas, 10)
         row = ["shipid", "gps_n", "gps_w", "fuel", "stg", "stt", "srv", "oil",
-               "rpm", "vib", "temp", "slantx", "slanty", "speed", "distance", "updated"]
+               "rpm", "vib", "temp", "slantx", "slanty", "speed", "distance", "updated", "compas"]
         val = [1, self.gps_n, self.gps_w, self.fuel, self.stg, self.stt, self.srv, self.oil,
-               self.rpm, self.vib, self.temp, self.slantx, self.slanty, self.speed, self.distance, int(dt.timestamp(dt.now()))]
+               self.rpm, self.vib, self.temp, self.slantx, self.slanty, self.speed, self.distance, int(dt.timestamp(dt.now())), self.compas]
         await basicpg().new_row("senses", row, val)
 
 

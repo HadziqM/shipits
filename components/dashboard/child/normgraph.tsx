@@ -2,41 +2,70 @@ import { Chart } from "react-google-charts";
 import { useState, useEffect } from "react";
 
 export default function NormGraph(props: any) {
-  const [data, setData] = useState([
-    ["Second", props.name],
+  const dummy = [["Second", props.name]];
+  const dummy2 = [
     ["0", 0],
-  ]);
-  const [truth, setTruth] = useState(props.history);
-  const [history, setHistory] = useState(props.historyData);
+    ["0", 0],
+    ["0", 0],
+    ["0", 0],
+    ["0", 0],
+    ["0", 0],
+    ["0", 0],
+    ["0", 0],
+    ["0", 0],
+    ["0", 0],
+  ];
+  const [data, setData] = useState(dummy2 as any);
+  // const [truth, setTruth] = useState(props.history);
+  // const [history, setHistory] = useState(props.historyData);
   useEffect(() => {
-    if (props.history === false) {
-      let check = setInterval(() => {
-        props.now == props.next ? update(props.next) : setData(data);
-        truth === true && setTruth(false);
-      }, 5000);
-      return () => {
-        clearInterval(check);
-      };
-    } else {
-      truth === false && setTruth(true);
-    }
-  }, [data]);
-  useEffect(() => {
-    truth === true
-      ? setHistory(props.historyData)
-      : setData([
-          ["Second", props.name],
-          ["0", 0],
-        ]);
-  }, [truth]);
+    let test = [props.data, ...data];
+    test.pop();
+    setData(test);
+  }, [props.data]);
+  // let idkits = () => {
+  //   let test = [props.data, ...data];
+  //   test.pop();
+  //   setData(test);
+  //   console.log([...dummy, ...test]);
+  //   return [...dummy, ...test];
+  // };
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     let test = [...dummy, props.data, ...data];
+  //     test.pop();
+  //     setData(test);
+  //   }, 1500);
+  // }, [data]);
+  // useEffect(() => {
+  //   if (props.history === false) {
+  //     let check = setInterval(() => {
+  //       props.now == props.next ? update(props.next) : setData(data);
+  //       truth === true && setTruth(false);
+  //     }, 5000);
+  //     return () => {
+  //       clearInterval(check);
+  //     };
+  //   } else {
+  //     truth === false && setTruth(true);
+  //   }
+  // }, [data]);
+  // useEffect(() => {
+  //   truth === true
+  //     ? setHistory(props.historyData)
+  //     : setData([
+  //         ["Second", props.name],
+  //         ["0", 0],
+  //       ]);
+  // }, [truth]);
 
-  let output = props.history === false ? data : history;
-  let update = (some: any) => {
-    let updated: any = data;
-    updated.push(some);
-    updated.length >= 10 && updated.pop();
-    setData(updated);
-  };
+  // let output = props.history === false ? data : history;
+  // let update = (some: any) => {
+  //   let updated: any = data;
+  //   updated.push(some);
+  //   updated.length >= 10 && updated.pop();
+  //   setData(updated);
+  // };
   const anjir = {
     title: props.name,
     titleTextStyle: { color: "#fff" },
@@ -56,7 +85,7 @@ export default function NormGraph(props: any) {
         chartType="AreaChart"
         width="100%"
         height="100%"
-        data={output}
+        data={[...dummy, ...data]}
         options={anjir}
       />
     </div>

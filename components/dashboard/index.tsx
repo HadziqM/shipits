@@ -35,14 +35,14 @@ export default function Dash() {
     slantsense: false,
     gps: false,
     camera: false,
-    updated: "2022-10-13T00:09:31.769Z",
+    updated: 1665645840,
   };
   const [history, setHistory] = useState(true);
   const [shipdown, setShipdown] = useState([]);
   const [somedata, setSomedata] = useState({} as any);
   const [maxvalue, setMaxvalue] = useState({} as any);
   const [value, setValue] = useState(dummy as any);
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(1);
   const user = "hertz";
   let select = (e: string) => {
     setMaxvalue(somedata[e]);
@@ -68,10 +68,10 @@ export default function Dash() {
   }, []);
   useEffect(() => {
     let hmmm = setInterval(async () => {
+      console.log(selected);
       const data = await (await fetch(`/api/ship/${selected}`)).json();
       data.ship == null ? setValue(dummy) : setValue(data.ship);
-      console.log(typeof value.updated);
-    }, 2000);
+    }, 1500);
     return () => {
       clearInterval(hmmm);
     };
@@ -85,6 +85,7 @@ export default function Dash() {
           drop={[1, 2, 3]}
           get={hist}
           now={() => setHistory(false)}
+          time={value.updated}
         />
         <ShipMount history={history} maxvalue={maxvalue} value={value} />
       </div>
