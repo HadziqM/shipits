@@ -1,4 +1,4 @@
-from tkinter import Button
+import asyncio
 import discord
 from discord.ext import commands
 from discord import ButtonStyle, Embed, app_commands
@@ -14,21 +14,22 @@ class myview(View):
         self.msg = msg
 
     @discord.ui.button(label="start", style=ButtonStyle.green, emoji='👍')
-    async def start(self, inter: discord.Interaction, button: Button):
+    async def start(self, inter: discord.Interaction, button):
         button.disabled = True
         await inter.response.edit_message(view=self)
+        gen = getwtf()
         while True:
             embed = Embed(title="Generating Random Data to Database",
                           description=f"generating {self.count} data to database")
             await self.msg.edit(embed=embed)
             self.count += 1
             await asyncio.sleep(2)
-            await getwtf().one_row()
+            await gen.one_row()
             if self.stopped:
                 break
 
     @discord.ui.button(label="stop", style=ButtonStyle.red, emoji='💩')
-    async def stop(self, inter: discord.Interaction, button: Button):
+    async def stop(self, inter: discord.Interaction, button):
         button.disabled = True
         await inter.response.edit_message(view=self)
         await inter.followup.send("stopped", ephemeral=True)

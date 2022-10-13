@@ -1,6 +1,6 @@
 from base import *
 import random
-import asyncio
+from datetime import datetime as dt
 
 
 def rand_asc(num, range: int):
@@ -35,7 +35,7 @@ class getwtf:
         self.stg = 1500
         self.stt = 1000
         self.srv = 500
-        self.oil = 1000
+        self.oil = 200
         self.temp = 70
         self.rpm = 200
         self.vib = 2000
@@ -47,10 +47,10 @@ class getwtf:
     async def one_row(self):
         self.gps_n = rand_float(self.gps_n)
         self.gps_w = rand_float(self.gps_w)
-        self.fuel = rand_desc(self.fuel, 3)
-        self.stg = rand_desc(self.stg, 1)
-        self.stt = rand_desc(self.stt, 1)
-        self.srv = rand_desc(self.srv, 1)
+        self.fuel = rand_desc(self.fuel, 30)
+        self.stg = rand_desc(self.stg, 10)
+        self.stt = rand_desc(self.stt, 10)
+        self.srv = rand_desc(self.srv, 10)
         self.oil = rand_cmp(self.oil, 5)
         self.temp = rand_cmp(self.temp, 1)
         self.rpm = rand_cmp(self.rpm, 10)
@@ -60,9 +60,9 @@ class getwtf:
         self.speed = rand_cmp(self.speed, 1)
         self.distance = rand_asc(self.distance, 1)
         row = ["shipid", "gps_n", "gps_w", "fuel", "stg", "stt", "srv", "oil",
-               "rpm", "vib", "temp", "slantx", "slanty", "speed", "distance"]
+               "rpm", "vib", "temp", "slantx", "slanty", "speed", "distance", "updated"]
         val = [1, self.gps_n, self.gps_w, self.fuel, self.stg, self.stt, self.srv, self.oil,
-               self.rpm, self.vib, self.temp, self.slantx, self.slanty, self.speed, self.distance]
+               self.rpm, self.vib, self.temp, self.slantx, self.slanty, self.speed, self.distance, int(dt.timestamp(dt.now()))]
         await basicpg().new_row("senses", row, val)
 
 

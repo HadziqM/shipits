@@ -6,13 +6,47 @@ import HistControl from "./histcontrol";
 import { useState, useEffect } from "react";
 
 export default function Dash() {
-  const [history, setHistory] = useState(false);
+  const dummy = {
+    id: 1,
+    shipid: 1,
+    gps_n: 0,
+    gps_w: 0,
+    distance: 0,
+    fuel: 0,
+    stg: 0,
+    stt: 0,
+    srv: 0,
+    oil: 0,
+    temp: 0,
+    rpm: 0,
+    vib: 0,
+    slantx: 0,
+    slanty: 0,
+    speed: 0,
+    gsm: false,
+    internet: false,
+    satelit: false,
+    flow: false,
+    level: false,
+    rpmsense: false,
+    vibsense: false,
+    oilsense: false,
+    tempsense: false,
+    slantsense: false,
+    gps: false,
+    camera: false,
+    updated: "2022-10-13T00:09:31.769Z",
+  };
+  const [history, setHistory] = useState(true);
   const [shipdown, setShipdown] = useState([]);
   const [somedata, setSomedata] = useState({} as any);
   const [maxvalue, setMaxvalue] = useState({} as any);
+  const [value, setValue] = useState(dummy as any);
+  const [selected, setSelected] = useState(0);
   const user = "hertz";
   let select = (e: string) => {
     setMaxvalue(somedata[e]);
+    setSelected(Number(e));
   };
   let hist = (data: object) => {
     setHistory(true);
@@ -32,6 +66,16 @@ export default function Dash() {
     };
     shit();
   }, []);
+  useEffect(() => {
+    let hmmm = setInterval(async () => {
+      const data = await (await fetch(`/api/ship/${selected}`)).json();
+      data.ship == null ? setValue(dummy) : setValue(data.ship);
+      console.log(typeof value.updated);
+    }, 2000);
+    return () => {
+      clearInterval(hmmm);
+    };
+  }, [value]);
   return (
     <>
       <HeaderIts></HeaderIts>
@@ -42,7 +86,7 @@ export default function Dash() {
           get={hist}
           now={() => setHistory(false)}
         />
-        <ShipMount history={history} maxvalue={maxvalue} />
+        <ShipMount history={history} maxvalue={maxvalue} value={value} />
       </div>
       <FooterIts></FooterIts>
     </>

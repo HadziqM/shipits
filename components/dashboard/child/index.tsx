@@ -9,8 +9,8 @@ import Gps from "./gps";
 import Gyro from "./gyro";
 import Notif from "./notif";
 import Status from "./status";
+import { useState } from "react";
 export default function ShipMount(props: any) {
-  let hist = props.history;
   const data = [
     ["Seconds", "RPM"],
     ["0", 50],
@@ -31,75 +31,102 @@ export default function ShipMount(props: any) {
     ["50", 90, 34, 21, 31],
     ["60", 30, 12, 34, 32],
   ];
+  const [rpm, setRpm] = useState(["0", 0]);
+  const [temp, setTemp] = useState(["0", 0]);
+  const [oil, setOil] = useState(["0", 0]);
+  const [vib, setVib] = useState(["0", 0]);
+  const [fuel, setFuel] = useState(["0", 0, 0, 0, 0]);
+
+  let rpmsense = () => {
+    return "adios";
+  };
   return (
     <div className="w-4/5 grid grid-rows-6 grid-flow-col gap-1">
-      <Fuel maxfuel={props.maxvalue.maxfuel} />
+      <Fuel maxfuel={props.maxvalue.maxfuel} fuel={props.value.fuel} />
       <FuelSc
         maxstg={props.maxvalue.maxstg}
         maxstt={props.maxvalue.maxstt}
         maxsrv={props.maxvalue.maxsrv}
+        stg={props.value.stg}
+        stt={props.value.stt}
+        srv={props.value.srv}
       />
       <Radial
         id="rpm"
         name="Rpm"
         symbol="0"
         maxradial={props.maxvalue.maxrpm}
-        radial="50"
+        radial={props.value.rpm}
       />
       <Radial
         id="temp"
         name="Temp"
         symbol="C"
         maxradial={props.maxvalue.maxtemp}
-        radial="20"
+        radial={props.value.temp}
       />
       <Radial
         id="oil"
         name="Oil"
         symbol="L"
         maxradial={props.maxvalue.maxoil}
+        radial={props.value.oil}
       />
       <Radial
         id="vib"
         name="Vib"
         symbol="Khz"
         maxradial={props.maxvalue.maxvib}
+        radial={props.value.vib}
       />
-      <FuelGraph history={true} historyData={data2} />
+      <FuelGraph history={props.history} historyData={data2} />
       <NormGraph
         id="rpmg"
         name="Rpm"
         color="#fff"
-        history={true}
+        history={props.history}
         historyData={data}
       />
       <NormGraph
         id="tempg"
         name="Temp"
         color="#f0f"
-        history={true}
+        history={props.history}
         historyData={data}
       />
       <NormGraph
         id="oilg"
         name="Oil"
         color="#ff0"
-        history={true}
+        history={props.history}
         historyData={data}
       />
       <NormGraph
         id="vibg"
         name="Vib"
         color="#00f"
-        history={true}
+        history={props.history}
         historyData={data}
       />
-      <Compas />
-      <Gyro />
-      <Gps />
-      <Distance />
+      <Compas degree={props.value.compas} />
+      <Gyro slantX={props.value.slantx} slantY={props.value.slanty} />
+      <Gps gpsn={props.value.gps_n} gpsw={props.value.gps_w} />
+      <Distance distance={props.value.distance} />
       <Notif />
-      <Status />
+      <Status
+        gsm={props.value.gsm}
+        internet={props.value.internet}
+        satelite={props.value.satelit}
+        flow={props.value.flow}
+        level={props.value.level}
+        rpm={props.value.rpmsense}
+        vib={props.value.vibsense}
+        oil={props.value.oilsense}
+        temp={props.value.tempsense}
+        slant={props.value.slantsense}
+        gps={props.value.gps}
+        camera={props.value.camera}
+      />
     </div>
   );
 }
