@@ -66,10 +66,10 @@ class getwtf:
         await basicpg().new_row("senses", row, val)
 
 
-async def main():
-    test = getwtf()
-    for i in range(5):
-        await test.one_row()
+# async def main():
+#     test = getwtf()
+#     for i in range(5):
+#         await test.one_row()
 
 
-asyncio.run(main())
+# asyncio.run(main())
