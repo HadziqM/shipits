@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Typescrypt Config
 
-```shellscript
+```bat
 npx create-next-app@latest --ts
 mkdir components
 mkdir lib
@@ -25,23 +25,25 @@ add path to tsconfig.json CompilerOptions</br>
 
 ### Tailwind Config
 
-> npm install -D tailwindcss postcss autoprefixer </br>
-> npx tailwindcss init -p </br>
-> npm i daisyui </br>
+```properties
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm i daisyui
+```
 
 setting up tailwind.config.json <br/>
 
-```json
-    module.exports = {
-    content: [
-        "./pages/**/*.{js,ts,jsx,tsx}",
-        "./components/**/*.{js,ts,jsx,tsx}",
-    ],
-    theme: {
-        extend: {},
-    },
-    plugins: [require("daisyui")],
-    };
+```js
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [require("daisyui")],
+};
 ```
 
 add some tailwind decorator on styles/global.css
@@ -54,7 +56,9 @@ add some tailwind decorator on styles/global.css
 
 ### Prisma Config
 
-> npm i ts-node --save-dev <br/>
+```proprties
+npm i ts-node --save-dev
+```
 
 add output dir to tsconfig.json CompilerOptions<br/>
 
@@ -63,23 +67,31 @@ add output dir to tsconfig.json CompilerOptions<br/>
     "outDir": "dist"
 ```
 
-> npm install prisma --save-dev <br/>
-> npx prisma init --datasource-provider postgresql <br/>
+```proprties
+npm install prisma --save-dev
+npx prisma init --datasource-provider postgresql
+```
 
 edit .env for psql database url<br/>
 edit schema.prisma <br/><br/>
 
-> npx prisma migrate dev --name init <br/>
+```proprties
+npx prisma migrate dev --name init
+```
 
 ### Google Charts
 
-> npm install --save react-google-charts
+```proprties
+npm install --save react-google-charts
+```
 
 ## Developer Mode
 
 ### Prisma Playground
 
-> npx prisma studio <br/>
+```proprties
+npx prisma studio
+```
 
 ### Next Playground
 
@@ -94,7 +106,9 @@ add some script on package.json to make next run on specific ip and port<br/>
     },
 ```
 
-> npm run dev
+```proprties
+npm run dev
+```
 
 ## Testing With Discord
 
@@ -102,17 +116,23 @@ add some script on package.json to make next run on specific ip and port<br/>
 
 - go to testing directory and make sure you have installed python and have pip on environmental variables </br>
 
-> cd test
+```bat
+cd test
+```
 
 - install required library with pip package installer </br>
 
-> pip install -r requirements.txt
+```proprties
+pip install -r requirements.txt
+```
 
 - get yourself discord bot and invite it to your discord server </br>
 - get your discord token and fill it on database.ini </br>
 - run discord bot </br>
 
-> python main.py
+```proprties
+python main.py
+```
 
 - go to your discord server and type ==%sync== to sync bot's slash command to your discord server </br>
 - use slash command test to generate dummy data to your database </br>
@@ -126,14 +146,20 @@ add some script on package.json to make next run on specific ip and port<br/>
 
 - you can deploy server by simply build next.js </br>
 
-> npm run build
+```proprties
+npm run build
+```
 
 - setting ip and port you want to deploy to on package.json, its on "scripts" section and "start" option </br>
 
-- then start server troungh terminal
+- then start server troungh terminal </br>
 
-> npm start
+```proprties
+npm start
+```
 
 - to run discord bot its simply just run them, you can add your custom command on cogs folder </br>
 
-> cd test && python main.py
+```bat
+cd test && python main.py
+```
