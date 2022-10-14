@@ -4,16 +4,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Typescrypt Config
 
-```console
-npx create-next-app@latest --ts </br>
-mkdir components </br>
-mkdir lib </br>
-mkdir test </br>
+```shellscript
+npx create-next-app@latest --ts
+mkdir components
+mkdir lib
+mkdir test
 ```
 
 add path to tsconfig.json CompilerOptions</br>
 
-```
+```json
     "baseUrl": ".",
     "paths": {
         "@/components/_": ["components/_"],
@@ -31,7 +31,7 @@ add path to tsconfig.json CompilerOptions</br>
 
 setting up tailwind.config.json <br/>
 
-```
+```json
     module.exports = {
     content: [
         "./pages/**/*.{js,ts,jsx,tsx}",
@@ -46,10 +46,10 @@ setting up tailwind.config.json <br/>
 
 add some tailwind decorator on styles/global.css
 
-```
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 ```
 
 ### Prisma Config
@@ -58,7 +58,7 @@ add some tailwind decorator on styles/global.css
 
 add output dir to tsconfig.json CompilerOptions<br/>
 
-```
+```json
     "sourceMap": true,
     "outDir": "dist"
 ```
@@ -85,7 +85,7 @@ edit schema.prisma <br/><br/>
 
 add some script on package.json to make next run on specific ip and port<br/>
 
-```
+```json
     "scripts": {
         "dev": "next dev --hostname 127.0.0.1 -p 8000",
         "build": "next build",
