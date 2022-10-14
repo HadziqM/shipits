@@ -4,10 +4,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Typescrypt Config
 
-> npx create-next-app@latest --ts </br>
-> mkdir components </br>
-> mkdir lib </br>
-> mkdir test </br>
+```console
+npx create-next-app@latest --ts </br>
+mkdir components </br>
+mkdir lib </br>
+mkdir test </br>
+```
 
 add path to tsconfig.json CompilerOptions</br>
 
@@ -93,3 +95,45 @@ add some script on package.json to make next run on specific ip and port<br/>
 ```
 
 > npm run dev
+
+## Testing With Discord
+
+### Setting up Discord.py
+
+- go to testing directory and make sure you have installed python and have pip on environmental variables </br>
+
+> cd test
+
+- install required library with pip package installer </br>
+
+> pip install -r requirements.txt
+
+- get yourself discord bot and invite it to your discord server </br>
+- get your discord token and fill it on database.ini </br>
+- run discord bot </br>
+
+> python main.py
+
+- go to your discord server and type ==%sync== to sync bot's slash command to your discord server </br>
+- use slash command test to generate dummy data to your database </br>
+
+### Alternatives
+
+- for alternatives you could also use postman to generate dummy data </br>
+- you need to install ngrok and expose your psql port or forward your database port stright to internet and send dummy data from postman </br>
+
+## Deploy
+
+- you can deploy server by simply build next.js </br>
+
+> npm run build
+
+- setting ip and port you want to deploy to on package.json, its on "scripts" section and "start" option </br>
+
+- then start server troungh terminal
+
+> npm start
+
+- to run discord bot its simply just run them, you can add your custom command on cogs folder </br>
+
+> cd test && python main.py
