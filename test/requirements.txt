@@ -1,0 +1,5 @@
+###### Requirements without Version Specifiers ######
+asyncio
+###### Requirements with Version Specifiers ######
+asyncpg == 0.26.0
+discord.py == 2.0.1
